@@ -36,6 +36,7 @@ setup(name='ceph_cfg',
     author_email="osynge@suse.com",
     license='Apache License (2.0)',
     install_requires=[
+        'nose',
         'netifaces',
     ],
     url = 'https://github.com/oms4suse/python-ceph-cfg.git',
@@ -59,6 +60,7 @@ setup(name='ceph_cfg',
     ],
     setup_requires=[
         'nose',
+        'netifaces',
     ],
     test_suite = 'nose.collector',
     )
