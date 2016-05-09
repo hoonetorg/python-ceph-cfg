@@ -3,6 +3,8 @@ import os
 import ConfigParser
 import base64
 import binascii
+import netifaces
+import socket
 
 __has_salt = True
 
@@ -86,3 +88,24 @@ def is_valid_base64(s):
         base64.decodestring(s)
     except binascii.Error:
         raise Error("invalid base64 string supplied %s" % s)
+
+
+def _lookup(addr):
+    try:
+        return socket.gethostbyaddr(addr)
+    except socket.herror:
+        return None
+
+
+def get_hostnames():
+    hostnames = []
+    for iface in netifaces.interfaces():
+        for iface,iface_datas in netifaces.ifaddresses(iface).items():
+            if iface in [ netifaces.AF_INET ]:
+                for iface_data in iface_datas:
+                    if iface_data.get('addr'):
+                        lookup_tuple = _lookup((iface_data.get('addr')))
+                        if lookup_tuple is not None:
+                            hostnames += [ lookup_tuple[0] ]
+                            hostnames += lookup_tuple[1]
+    return hostnames

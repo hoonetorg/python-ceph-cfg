@@ -32,7 +32,7 @@ class mdl_query():
         if self.model.hostname is None:
             raise Error("Programming error: Hostname not detected")
         for hostname, addr in self.model.mon_members:
-            if hostname == self.model.hostname:
+            if hostname in utils.get_hostnames():
                 return True
         return False
 

@@ -35,7 +35,9 @@ setup(name='ceph_cfg',
     author="O M Synge",
     author_email="osynge@suse.com",
     license='Apache License (2.0)',
-    install_requires=[],
+    install_requires=[
+        'netifaces',
+    ],
     url = 'https://github.com/oms4suse/python-ceph-cfg.git',
     packages = ['ceph_cfg'],
     classifiers=[
